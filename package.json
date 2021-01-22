@@ -1,0 +1,21 @@
+{
+  "name": "cetekgeni",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Falent",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "edit-package-json": "^0.2.3",
+    "express": "^4.17.1",
+    "facebook-tools": "^2.0.0",
+    "morgan": "^1.10.0",
+    "node-fetch": "^2.6.1",
+    "ytdl-core": "^4.4.4"
+  }
+}
