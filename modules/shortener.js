@@ -29,6 +29,26 @@ const data = {
     return result = await response.json()
     }
 
+linkku =async(originalURL,path)=>{
+  if(path === undefined)path = random(6)
+const data = {
+    "domain":"linkku.cf",
+    "originalURL": originalURL,
+    "path": path + Math.floor((Math.random() * 100) + 1)
+    }
+ let response = await fetch('https://api.short.cm/links/public', {
+    method: 'post',
+    headers: {
+      'accept': 'application/json',
+      'Content-Type': 'application/json',
+      'authorization': 'aplz6uCJp3SOUaI7YWdYur26EJHqkvS6'
+    },
+    body: JSON.stringify(data)
+  })
+    return result = await response.json()
+    }
+
     module.exports ={
-      perpendek
+      perpendek,
+      linkku
     }
