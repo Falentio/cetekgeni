@@ -6,7 +6,8 @@ const app = express()
 const {
    pndk,
    fbtol,
-   ytdl
+   ytdl,
+   tiktod
 } = require('./modules')
 
 var allowCrossDomain = function(req, res, next) {
@@ -66,6 +67,12 @@ app.get('/yt',async (req,res)=>{
   url = req.originalUrl.replace('/yt?url=','')
   ytInfo = await ytdl.getInfo(url)
   return res.send(ytInfo)
+})
+
+app.get('/tiktok',async (req,res)=>{
+  url = req.originalUrl.replace('/tiktok?url=','')
+  data = await tiktod.videoMeta(url)
+  return res.send(data.collector[0].videoUrl)
 })
 
 app.listen(process.env.PORT || 3000,() => console.log('mendengarkan port 3000'))
