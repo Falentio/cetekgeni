@@ -28,13 +28,19 @@ app.get('/',(req,res)=>{
 	return res.send('Halo Dunia')
 })
 
+app.get('/shortener/:path/:domain',async (req,res)=>{
+  path = req.params.path
+  domain = req.params.domain
+  url = req.originalUrl.replace(`/shortener/${path}/${domain}?url=`).replace('undefined','')
+  pendek = await pndk.perpendek({"path":path,"url":url,"domain":domain})
+  return res.send({"shortURL" : pendek.shortURL,"originalURL":pendek.originalURL})
+})
+
 app.get('/shortener/:path',async (req,res)=>{
   path = req.params.path
   link = req.originalUrl.replace('/shortener/' + path + '?url=','')
-  pendek = await pndk.perpendek(link, path)
-  linkku = await pndk.linkku(link, path)
+  pendek = await pndk.perpendek({"url":link,"path": path})
   return res.send({"pndkURL":pendek.shortURL,
-  	"linkkuURL": linkku.shortURL,
     "original URL":pendek.originalURL
   })
 })
@@ -42,10 +48,8 @@ app.get('/shortener/:path',async (req,res)=>{
 
 app.get('/shortener',async (req,res)=>{
   link = req.originalUrl.replace('/shortener?url=','')
-  pendek = await pndk.perpendek(link)
-  linkku = await pndk.linkku(link)
+  pendek = await pndk.perpendek({"url":link})
   return res.send({"pndkURL":pendek.shortURL,
-  	"linkkuURL":linkku.shortURL,
     "original URL" : pendek.originalURL,
     "note":"if you want the short URL look neat,try use /shortener/YOUR_NAME?url=YOUR_LINK,so it will become (pndk.xyz or linkku.cf)/YOUR_NAME + 2 random number"
    })
