@@ -6,7 +6,8 @@ const app = express()
 const {
    pndk,
    fbtol,
-   ytdl
+   ytdl,
+   sh
 } = require('./modules')
 
 var allowCrossDomain = function(req, res, next) {
@@ -26,6 +27,12 @@ app.use(allowCrossDomain)
 
 app.get('/',(req,res)=>{
 	return res.send('Halo Dunia')
+})
+app.get('/sh',async (req,res) =>{
+  if(req.query.urlSH === undefined) return res.send('URL not defined')
+  data = req.originalUrl.replace('/sh?urlSH=','').replace(`&pathSH=${req.query.pathSH}`,'').replace(`&domainSH=${req.query.domainSH}`,'')
+  short = await sh.short({url : data , path : req.query.pathSH , domain : req.query.domainSH})
+  res.send(short)
 })
 
 app.get('/shortener/:path/:domain',async (req,res)=>{
