@@ -7,7 +7,8 @@ const {
    pndk,
    fbtol,
    ytdl,
-   sh
+   sh,
+   melong
 } = require('./modules')
 
 var allowCrossDomain = function(req, res, next) {
@@ -26,8 +27,17 @@ app.use(bodyParser.json())
 app.use(allowCrossDomain)
 
 app.get('/',(req,res)=>{
-	return res.send('Halo Dunia')
+	return res.redirect('https://github.com/Falentio/cetekgeni')
 })
+
+app.get('/melong/:method',async (req,res)=>{
+  method = req.params.method
+  if(method === 'search')data = await melong.search(req.query.name)
+  if(method === 'desc')data = await melong.desc(req.query.url)
+  if(method === 'help')data = `pertama gunakan ${req.hostname}/search?name=[nama film], lalu gunakan ${req.hostname}/desc?url=[webUrl pada search]`
+  res.send(data)
+})
+
 app.get('/sh',async (req,res) =>{
   if(req.query.urlSH === undefined) return res.send('URL not defined')
   data = req.originalUrl.replace('/sh?urlSH=','').replace(`&pathSH=${req.query.pathSH}`,'').replace(`&domainSH=${req.query.domainSH}`,'')
