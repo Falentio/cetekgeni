@@ -34,7 +34,7 @@ desc = async(url) =>{
     	}
     }
 
-    rea.link = {}
+    res.link = {}
     res.link.batch = {}
     $("div[style='text-align: center;'] div[style='background: #a3000d; padding: 7px; text-align: center; color: white;']:contains(BATCH)").next().find('p').each(function(){
     	data = []
@@ -42,7 +42,7 @@ desc = async(url) =>{
     	$(this).find('a').each(function(){
     		data.push($(this).attr('href'))
     	})
-    	res.link.batch[reso] = sort(data)
+    	res.link.batch[reso] = data
     })
 
     res.link.eps = {}
