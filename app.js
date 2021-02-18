@@ -35,7 +35,7 @@ app.get('/melong/:method',async (req,res)=>{
   if(method === 'search')data = await melong.search(req.query.name)
   if(method === 'desc')data = await melong.desc(req.query.url)
   if(method === 'help')data = `pertama gunakan ${req.hostname}/search?name=[nama film], lalu gunakan ${req.hostname}/desc?url=[webUrl pada search]`
-  res.send(data)
+  res.json(data)
 })
 
 app.get('/sh',async (req,res) =>{
