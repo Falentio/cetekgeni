@@ -34,29 +34,29 @@ desc = async(url) =>{
     	}
     }
 
-    res.batchLink = {}
+    rea.link = {}
+    res.link.batch = {}
     $("div[style='text-align: center;'] div[style='background: #a3000d; padding: 7px; text-align: center; color: white;']:contains(BATCH)").next().find('p').each(function(){
     	data = []
     	reso = $(this).text().split('=')[0].trim()
     	$(this).find('a').each(function(){
     		data.push($(this).attr('href'))
     	})
-    	res.batchLink[reso] = sort(data)
+    	res.link.batch[reso] = sort(data)
     })
 
-    res.epsLink = {}
+    res.link.eps = {}
     $("div[style='text-align: center;'] div[style='background: #a3000d; padding: 7px; text-align: center; color: white;']:contains(EPISODE)").next().find('p').each(function(){
     	data = []
     	reso = $(this).text().split('')[0].trim()
     	$(this).find("a[href]").each(function(){
     		data.push($(this).attr('href'))
     	})
-    	res.epsLink[reso] = data
+    	res.link.eps[reso] = data
     })
 
-    if(str(res.epsLink) !== str({}) && str(res.batchLink) !== str({}))return res
-    delete res.epsLink
-    delete res.batchLink
+    if(str(res.link.eps) !== str({}) && str(res.link.batch) !== str({}))return res
+    delete res.link
 
     res.link = {}
     $("div[class=dzdesu] h2:contains(LINK DOWNLOAD)").parent().find('p').each(function(){
